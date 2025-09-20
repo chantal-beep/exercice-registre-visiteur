@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercice — Registre visiteur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fb;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h2 {
+      color: #1f4e79;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .scenario {
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #1f4e79;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #e6eef7;
+    }
+    input {
+      width: 95%;
+      border: none;
+      padding: 8px;
+      font-size: 14px;
+      background: transparent;
+      outline: none;
+    }
+    .btn {
+      background: #1f4e79;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-top: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #163b5a;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Exercice pratique — Registre visiteur</h2>
+    <p class="scenario">
+      <strong>Scénario :</strong> Ce matin, un visiteur se présente à l’accueil.  
+      Il s’appelle <em>Sarah Leroy</em>, de la société <em>Verte Nature</em>.  
+      Elle a rendez-vous avec <em>M. Bernard</em>, du service <em>Ressources Humaines</em>.  
+      Elle est arrivée à <strong>9h15</strong>.  
+      <br><br>
+      <strong>À toi de jouer :</strong> remplis le registre visiteur correctement avec ces informations.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Registre "Visiteurs"</h2>
+    <form id="registreForm">
+      <table>
+        <thead>
+          <tr>
+            <th>Date visite</th>
+            <th>Nom visiteur</th>
+            <th>Objet de la visite</th>
+            <th>Destinataires</th>
+            <th>Observation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="ex : 12/09/2025"></td>
+            <td><input type="text" placeholder="Nom et prénom"></td>
+            <td><input type="text" placeholder="Objet de la visite"></td>
+            <td><input type="text" placeholder="Personne rencontrée"></td>
+            <td><input type="text" placeholder="Observations"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn" onclick="verifier()">Valider l'enregistrement</button>
+    </form>
+    <p id="feedback" class="result"></p>
+  </div>
+
+  <script>
+    function verifier() {
+      const inputs = document.querySelectorAll("#registreForm input");
+      const valeurs = Array.from(inputs).map(el => el.value.trim().toLowerCase());
+
+      if (valeurs.includes("")) {
+        document.getElementById("feedback").textContent = "❌ Merci de remplir toutes les cases.";
+        document.getElementById("feedback").style.color = "red";
+        return;
+      }
+
+      // Correction attendue (simplifiée)
+      const attendu = ["12/09/2025", "sarah leroy", "contrat de travail", "m. bernard", "9h15"];
+      let correct = true;
+
+      attendu.forEach((rep, i) => {
+        if (!valeurs[i].includes(rep)) correct = false;
+      });
+
+      if (correct) {
+        document.getElementById("feedback").textContent = "✅ Bravo, les informations du registre sont correctes !";
+        document.getElementById("feedback").style.color = "green";
+      } else {
+        document.getElementById("feedback").textContent = "⚠️ Relis bien le scénario, certaines informations ne correspondent pas.";
+        document.getElementById("feedback").style.color = "orange";
+      }
+    }
+  </script>
+
+</body>
+</html>
